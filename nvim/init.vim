@@ -16,18 +16,73 @@
 
 "}}}
 
+Plug 'vim-airline/vim-airline'                                          " make statusline awesome
+Plug 'vim-airline/vim-airline-themes'                                   " themes for statusline 
+
+Plug 'zhou13/vim-easyescape' 						" allow exiting insert mode with jk or kj
+
+Plug 'nathanaelkane/vim-indent-guides' 					" show indent guides
+
+Plug 'preservim/nerdtree' 						" File explorer
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } 			" FZF fuzzy matcher
+Plug 'junegunn/fzf.vim'
+
+Plug 'vim-scripts/taglist.vim' 						" Tags within current file
+
+Plug 'frazrepo/vim-rainbow' 						" Colourful braces and parentheses
+
+" Plug 'dominikduda/vim_current_word' 					" Highlight word under cursor - not working well
+
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system
 call plug#end()
 
-" TextEdit might fail if hidden is not set.
-set hidden
+" Enable rainbow highlight on everything
+let g:rainbow_active = 1
+
+" easyescape configuration
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 100
+cnoremap jk <ESC>
+cnoremap kj <ESC>
+
+" indent guide configuration
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_enable_on_vim_startup = 1
+
+" nerd tree file explorer configuration
+map <C-n> :NERDTreeToggle<CR>
+
+"let g:python3_host_prog = '/usr/sbin/python3'
+"let g:python_host_prog = '/usr/sbin/python2'
+
+" use the terminal colors
+set termguicolors
+
+" colorscheme options
+colorscheme jellybeans 
 
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
+
+set number  " always show current line number
+set wrapscan  " begin search from top of file when nothing is found anymore
+
+set history=1000  " remember more commands and search history
+
+set scrolloff=3 " keep three lines between the cursor and the edge of the screen
+
+set undolevels=10000  " maximum number of changes that can be undone
+set undoreload=100000  " maximum number lines to save for undo on a buffer reload
+set undofile " Maintain undo history between sessions
+
+set splitright  " i prefer splitting right and below
+set splitbelow
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -42,6 +97,40 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
+
+set hlsearch  " highlight search and search while typing
+set incsearch
+set cpoptions+=x  " stay at seach item when <esc>
+
+" Easy open terminal
+nnoremap <C-t> :sp term://bash <CR> :resize 10 <CR> A
+
+" Better Terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-a> <Esc>
+nnoremap <C-a> <Esc>
+nnoremap <C-x> <Esc>
+
+" Remap ; to :
+map ; :
+
+let g:airline_powerline_fonts = 1
+let g:airline_section_y = ""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='onedark'
+ 
+" Airline settings
+" do not show error/warning section
+let g:airline_section_error = ""
+let g:airline_section_warning = ""
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Line length indicators
+autocmd FileType javascript setlocal colorcolumn=120
+autocmd FileType python setlocal colorcolumn=120
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -166,3 +255,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
