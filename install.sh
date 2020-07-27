@@ -2,6 +2,8 @@
 
 # Symlink the nvim and coc directory to this repo
 ln -s `pwd`/nvim/ ~/.config/nvim
+ln -s `pwd`/nvim/ ~/.vim
+ln -s `pwd`/nvim/init.vim ~/.vimrc
 ln -s `pwd`/coc/ ~/.config/coc
 
 # Install all plugins so we can use coc.nvim in the next step
