@@ -3,7 +3,7 @@
     "coc-clangd": "",
     "coc-highlight": "",
     "coc-json": "",
-    "coc-jedi": "",
-    "coc-tsserver": ""
+    "coc-tsserver": "",
+    "@yaegassy/coc-pylsp": ""
   }
 }
